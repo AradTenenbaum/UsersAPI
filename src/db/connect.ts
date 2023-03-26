@@ -2,6 +2,7 @@ const Pool = require("pg").Pool;
 
 export let dbPool:(typeof Pool);
 
+// Open pool from db
 export const setUpDB = async () => {
     dbPool = await new Pool({
         port: process.env.DB_PORT,

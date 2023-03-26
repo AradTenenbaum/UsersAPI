@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.setUpDB = exports.dbPool = void 0;
 const Pool = require("pg").Pool;
+// Open pool from db
 const setUpDB = () => __awaiter(void 0, void 0, void 0, function* () {
     exports.dbPool = yield new Pool({
         port: process.env.DB_PORT,

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getByQueryString = exports.partialUpdateQueryString = void 0;
+// Add parameters by the received data
 const addParameters = (data) => {
     let query = "";
     if (data.first_name)
@@ -17,6 +18,7 @@ const addParameters = (data) => {
         query += ' "department" = ' + data.department + ",";
     return query;
 };
+// Build partial update query, to update the fields that been added
 const partialUpdateQueryString = (id, data) => {
     let query = 'UPDATE "user" SET';
     query += addParameters(data);
@@ -25,6 +27,7 @@ const partialUpdateQueryString = (id, data) => {
     return query;
 };
 exports.partialUpdateQueryString = partialUpdateQueryString;
+// Add AND to parameter for where clause
 const addParametersWithAND = (data) => {
     let query = "";
     if (data.first_name)
@@ -41,6 +44,7 @@ const addParametersWithAND = (data) => {
         query += ' "department" = ' + data.department + " AND";
     return query;
 };
+// Builds the query of selecting by the params
 const getByQueryString = (data) => {
     let query = 'SELECT * FROM "user"';
     let addQuery = addParametersWithAND(data);

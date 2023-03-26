@@ -26,9 +26,6 @@ app.use((0, cors_1.default)());
 // routes connect
 app.use("/api/users", usersRoute);
 app.use("/api/departments", departmentsRoute);
-app.get('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    res.send("ok");
-}));
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, connect_1.setUpDB)();

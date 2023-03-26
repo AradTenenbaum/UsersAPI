@@ -9,8 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getDepartmentsWithUsersCount = void 0;
+exports.deleteDepartment = exports.createDepartment = exports.getDepartmentsWithUsersCount = void 0;
 const connect_1 = require("../connect");
+// Get departments with number of users related to each
 const getDepartmentsWithUsersCount = () => __awaiter(void 0, void 0, void 0, function* () {
     let result = { rows: [] };
     result = yield connect_1.dbPool.query('SELECT D."name", D."description", count(U.id) as usersCount FROM department D \
@@ -19,3 +20,14 @@ const getDepartmentsWithUsersCount = () => __awaiter(void 0, void 0, void 0, fun
     return result.rows;
 });
 exports.getDepartmentsWithUsersCount = getDepartmentsWithUsersCount;
+// Create department
+const createDepartment = (department) => __awaiter(void 0, void 0, void 0, function* () {
+    yield connect_1.dbPool.query('INSERT INTO "department" ("name", "description") \
+            VALUES($1, $2)', [department.name, department.description]);
+});
+exports.createDepartment = createDepartment;
+// Delete department
+const deleteDepartment = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    yield connect_1.dbPool.query('DELETE FROM "department" WHERE "id" = $1', [id]);
+});
+exports.deleteDepartment = deleteDepartment;

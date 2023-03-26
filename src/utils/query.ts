@@ -1,6 +1,7 @@
-import { GetUser, UpdateUser } from "../interfaces/user.interface";
+import { UserOptional } from "../interfaces/user.interface";
 
-const addParameters = (data: (UpdateUser | GetUser)): String => {
+// Add parameters by the received data
+const addParameters = (data: UserOptional): String => {
   let query: String = "";
   if (data.first_name) query += ' "first_name" = ' + `'${data.first_name}',`;
   if (data.last_name) query += ' "last_name" = ' + `'${data.last_name}',`;
@@ -11,9 +12,10 @@ const addParameters = (data: (UpdateUser | GetUser)): String => {
   return query;
 };
 
+// Build partial update query, to update the fields that been added
 export const partialUpdateQueryString = (
   id: Number,
-  data: UpdateUser
+  data: UserOptional
 ): String => {
   let query = 'UPDATE "user" SET';
   query += addParameters(data);
@@ -22,7 +24,8 @@ export const partialUpdateQueryString = (
   return query;
 };
 
-const addParametersWithAND = (data: (UpdateUser | GetUser)): String => {
+// Add AND to parameter for where clause
+const addParametersWithAND = (data: UserOptional): String => {
   let query: String = "";
   if (data.first_name) query += ' "first_name" = ' + `'${data.first_name}' AND`;
   if (data.last_name) query += ' "last_name" = ' + `'${data.last_name}' AND`;
@@ -33,7 +36,8 @@ const addParametersWithAND = (data: (UpdateUser | GetUser)): String => {
   return query;
 };
 
-export const getByQueryString = (data: GetUser):String => {
+// Builds the query of selecting by the params
+export const getByQueryString = (data: UserOptional):String => {
   let query = 'SELECT * FROM "user"';
   let addQuery = addParametersWithAND(data);
   if(data.id) addQuery += ' "id" = ' + data.id + " AND";

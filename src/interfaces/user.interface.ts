@@ -8,16 +8,7 @@ export interface User {
     department: number
 }
 
-export interface UpdateUser {
-    first_name?: string;
-    last_name?: string;
-    title?: string;
-    email?: string;
-    image?: string;
-    department?: number
-}
-
-export interface GetUser {
+export interface UserOptional {
     id?: Number;
     first_name?: string;
     last_name?: string;

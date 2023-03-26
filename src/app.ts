@@ -17,10 +17,6 @@ app.use(cors());
 app.use("/api/users", usersRoute);
 app.use("/api/departments", departmentsRoute);
 
-app.get('/', async (req: Request, res: Response, next: NextFunction) => {
-    res.send("ok")
-});
-
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {

@@ -12,12 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateUser = exports.deleteUser = exports.createUser = exports.getUsersByParams = void 0;
 const query_1 = require("../../utils/query");
 const connect_1 = require("../connect");
+// Get users by query params
 const getUsersByParams = (userData) => __awaiter(void 0, void 0, void 0, function* () {
     let result = { rows: [] };
     result = yield connect_1.dbPool.query((0, query_1.getByQueryString)(userData));
     return result.rows;
 });
 exports.getUsersByParams = getUsersByParams;
+// Create a user query
 const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     yield connect_1.dbPool.query('INSERT INTO "user" ("first_name", "last_name", "title", "email", "image", "department") \
         VALUES($1, $2, $3, $4, $5, $6)', [
@@ -30,10 +32,12 @@ const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     ]);
 });
 exports.createUser = createUser;
+// Delete a user query
 const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     yield connect_1.dbPool.query('DELETE FROM "user" WHERE "id" = $1', [id]);
 });
 exports.deleteUser = deleteUser;
+// Update a user query
 const updateUser = (id, data) => __awaiter(void 0, void 0, void 0, function* () {
     yield connect_1.dbPool.query((0, query_1.partialUpdateQueryString)(id, data));
 });
